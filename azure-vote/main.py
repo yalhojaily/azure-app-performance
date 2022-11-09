@@ -37,24 +37,24 @@ stats = stats_module.stats
 view_manager = stats.view_manager
 
 exporter = metrics_exporter.new_metrics_exporter(
-    enable_standard_metrics=True,
-    connection_string='InstrumentationKey=82af5ef5-c88f-4b96-a021-caa80926c649')
-    view_manager.register_exporter(exporter) # TODO: Setup exporter
+enable_standard_metrics=True,
+connection_string='InstrumentationKey=82af5ef5-c88f-4b96-a021-caa80926c649')
+view_manager.register_exporter(exporter) # TODO: Setup exporter
 
 # Tracing
 tracer = Tracer(
-    exporter=AzureExporter(
-        connection_string='InstrumentationKey=82af5ef5-c88f-4b96-a021-caa80926c649'),
-    samplers=ProbabilitySampler(1.0),
-    ) # TODO: Setup tracer
+ exporter=AzureExporter(
+    connection_string='InstrumentationKey=82af5ef5-c88f-4b96-a021-caa80926c649'),
+samplers=ProbabilitySampler(1.0),
+) # TODO: Setup tracer
 
 app = Flask(__name__)
 
 # Requests
 middleware = FlaskMiddleware(
-    app,
-    exporter=AzureExporter(connection_string='InstrumentationKey=82af5ef5-c88f-4b96-a021-caa80926c649'),
-    sampler=ProbabilitySampler(rate=1.0)
+ app,
+ exporter=AzureExporter(connection_string='InstrumentationKey=82af5ef5-c88f-4b96-a021-caa80926c649'),
+ sampler=ProbabilitySampler(rate=1.0)
 ) # TODO: Setup flask middleware
 
 # Load configurations from environment or config file
