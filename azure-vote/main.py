@@ -17,27 +17,20 @@ from opencensus.stats import measure as measure_module
 from opencensus.stats import stats as stats_module
 from opencensus.stats import view as view_module
 from opencensus.tags import tag_map as tag_map_module
-from opencensus.trace import config_integration
+#from opencensus.trace import config_integration
 from opencensus.ext.azure.trace_exporter import AzureExporter
 from opencensus.trace.samplers import ProbabilitySampler
 from opencensus.trace.tracer import Tracer
 from opencensus.ext.flask.flask_middleware import FlaskMiddleware
 
-# For metrics
-stats = stats_module.stats
-view_manager = stats.view_manager
+app = Flask(__name__)
 
 # Logging
-config_integration.trace_integrations(['logging'])
-config_integration.trace_integrations(['requests'])
+
 
 
 logger = logging.getLogger(__name__)
-handler = AzureLogHandler(connection_string='InstrumentationKey=82af5ef5-c88f-4b96-a021-caa80926c649')
-handler.setFormatter(logging.Formatter('%(traceId)s %(spanId)s %(message)s'))
-logger.addHandler(handler)
-logger.addHandler(AzureEventHandler(connection_string='InstrumentationKey=82af5ef5-c88f-4b96-a021-caa80926c649'))
-logger.setLevel(logging.INFO) # TODO: Setup logger
+handler = AzureLogHandler(connection_string='InstrumentationKey=82af5ef5-c88f-4b96-a021-caa80926c649') # TODO: Setup logger
 
 # Metrics
 exporter = metrics_exporter.new_metrics_exporter(
@@ -52,7 +45,7 @@ tracer = Tracer(
 sampler=ProbabilitySampler(1.0),
 ) # TODO: Setup tracer
 
-app = Flask(__name__)
+
 
 # Requests
 middleware = FlaskMiddleware(
