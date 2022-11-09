@@ -28,13 +28,13 @@ stats = stats_module.stats
 view_manager = stats.view_manager
 
 # Logging
-# config_integration.trace_integrations(['logging'])
-# config_integration.trace_integrations(['requests'])
+config_integration.trace_integrations(['logging'])
+config_integration.trace_integrations(['requests'])
 
 
 logger = logging.getLogger(__name__)
 handler = AzureLogHandler(connection_string='InstrumentationKey=82af5ef5-c88f-4b96-a021-caa80926c649')
-handler.setFormatter(logging.Formatter('%(traceId)s %(spanId)s %(message)s'))
+
 logger.addHandler(handler)
 logger.addHandler(AzureEventHandler(connection_string='InstrumentationKey=82af5ef5-c88f-4b96-a021-caa80926c649'))
 logger.setLevel(logging.INFO) # TODO: Setup logger
