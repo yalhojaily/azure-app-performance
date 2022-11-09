@@ -34,9 +34,8 @@ handler = AzureLogHandler(connection_string='InstrumentationKey=82af5ef5-c88f-4b
 
 # Metrics
 exporter = metrics_exporter.new_metrics_exporter(
-enable_standard_metrics=True,
-connection_string='InstrumentationKey=82af5ef5-c88f-4b96-a021-caa80926c649')
-view_manager.register_exporter(exporter) # TODO: Setup exporter
+    enable_standard_metrics=True,
+    connection_string='InstrumentationKey=82af5ef5-c88f-4b96-a021-caa80926c649') # TODO: Setup exporter
 
 # Tracing
 tracer = Tracer(
