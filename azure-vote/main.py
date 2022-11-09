@@ -28,8 +28,8 @@ stats = stats_module.stats
 view_manager = stats.view_manager
 
 # Logging
-config_integration.trace_integrations(['logging'])
-config_integration.trace_integrations(['requests'])
+# config_integration.trace_integrations(['logging'])
+# config_integration.trace_integrations(['requests'])
 
 
 logger = logging.getLogger(__name__)
