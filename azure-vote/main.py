@@ -45,7 +45,7 @@ view_manager.register_exporter(exporter) # TODO: Setup exporter
 tracer = Tracer(
  exporter=AzureExporter(
     connection_string='InstrumentationKey=82af5ef5-c88f-4b96-a021-caa80926c649'),
-samplers=ProbabilitySampler(1.0),
+sampler=ProbabilitySampler(1.0),
 ) # TODO: Setup tracer
 
 app = Flask(__name__)
